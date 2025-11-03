@@ -44,5 +44,6 @@
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_items"
+        android:visibility="gone"
         app:itemActiveIndicatorStyle="@android:color/transparent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

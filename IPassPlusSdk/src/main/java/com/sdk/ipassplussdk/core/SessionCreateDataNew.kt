@@ -23,7 +23,7 @@ object SessionCreateDataNew {
         completion: ResultListener<SessionCreateResponseNew>
     ) {
         if (InternetConnectionService.networkAvailable(context)) {
-            ApiClient("")?.create(ApiInterface::class.java)!!
+            ApiClient(context, "")?.create(ApiInterface::class.java)!!
                 .createSession(token, request).enqueue(object :
                     Callback<SessionCreateResponseNew>{
                     override fun onResponse(
@@ -35,7 +35,11 @@ object SessionCreateDataNew {
                         } else {
                             try {
                                 if (response.message().isNullOrEmpty()) {
-                                    completion.onError(response.body()?.error?.user?.title!!)
+                                    if (response.errorBody()?.string() != null && !response.errorBody()?.string().toString().equals("")) {
+                                        completion.onError(response.errorBody()?.string().toString())
+                                    } else {
+                                        completion.onError(response.body()?.error?.user?.title!!)
+                                    }
                                 } else {
                                     completion.onError(response.message())
                                 }

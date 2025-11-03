@@ -25,7 +25,7 @@ object AuthData {
         completion: ResultListener<AuthenticationResponse>
     ) {
         if (InternetConnectionService.networkAvailable(context)) {
-            ApiClient("")?.create(ApiInterface::class.java)!!
+            ApiClient(context, "")?.create(ApiInterface::class.java)!!
                 .auth(request).enqueue(object :
                     Callback<AuthenticationResponse> {
                     override fun onResponse(

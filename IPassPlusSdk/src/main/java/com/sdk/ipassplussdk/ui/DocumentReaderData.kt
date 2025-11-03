@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.nfc.NfcManager
 import android.os.Build
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.regula.documentreader.api.DocumentReader
@@ -35,12 +34,7 @@ object DocumentReaderData {
         this.context = context
         this.callback = callback
 
-        DocumentReader.Instance().processParams().multipageProcessing = true
-        DocumentReader.Instance().processParams().dateFormat = "dd-mm-yyyy"
-        DocumentReader.Instance().processParams().returnUncroppedImage = true
-        DocumentReader.Instance().functionality().edit().setShowSkipNextPageButton(false).apply()
-
-        val scannerConfig = ScannerConfig.Builder(Scenario.SCENARIO_FULL_PROCESS).build()
+        val scannerConfig = ScannerConfig.Builder(Scenario.SCENARIO_FULL_AUTH).build()
         DocumentReader.Instance().showScanner(context, scannerConfig, completion)
     }
 
@@ -65,50 +59,65 @@ object DocumentReaderData {
                 supportsRfid = false
             }
 
+            if (results?.textResult?.availableSourceList?.size != 0) {
 
-            if (results?.chipPage != 0 && supportsRfid ) {
-                DocumentReader.Instance().startRFIDReader(context!!, object: IRfidReaderCompletion() {
-                    override fun onChipDetected() {
-                        Log.d("Rfid", "Chip detected")
-                    }
+                if (results?.chipPage != 0 && supportsRfid) {
+                    DocumentReader.Instance()
+                        .startRFIDReader(context!!, object : IRfidReaderCompletion() {
+                            override fun onChipDetected() {
+                            }
 
-                    override fun onProgress(notification: DocumentReaderNotification) {
-                        rfidProgress(notification.code, notification.value)
-                    }
+                            override fun onProgress(notification: DocumentReaderNotification) {
+                                rfidProgress(notification.code, notification.value)
+                            }
 
-                    override fun onRetryReadChip(exception: DocReaderRfidException) {
-                        Log.d("Rfid", "Retry with error: " + exception.errorCode)
-                    }
+                            override fun onRetryReadChip(exception: DocReaderRfidException) {
+                            }
 
-                    override fun onCompleted(
-                        rfidAction: Int,
-                        results_RFIDReader: DocumentReaderResults?,
-                        error: DocumentReaderException?
-                    ) {
-                        if (rfidAction == DocReaderAction.COMPLETE) {
-                            rawResult = results_RFIDReader?.rawResult!!
-                            callback.invoke(true, rawResult!!)
-                        } else if (rfidAction == DocReaderAction.CANCEL) {
-                            rawResult = results?.rawResult
-                            callback.invoke(true, rawResult!!)
-                        } else if (rfidAction == DocReaderAction.TIMEOUT) {
-                            Toast.makeText(context,
-                                context!!.getString(R.string.something_went_wrong_with_nfc),Toast.LENGTH_SHORT).show()
-                            rawResult = results?.rawResult
-                            callback.invoke(true, rawResult!!)
-                        } else if (rfidAction == DocReaderAction.ERROR) {
-                            Toast.makeText(context, context!!.getString(R.string.something_went_wrong_with_nfc),Toast.LENGTH_SHORT).show()
-                            rawResult = results?.rawResult
-                            callback.invoke(true, rawResult!!)
-                        } else {
-                            rawResult = results?.rawResult
-                            callback.invoke(true, rawResult!!)
-                        }
-                    }
-                })
+                            override fun onCompleted(
+                                rfidAction: Int,
+                                results_RFIDReader: DocumentReaderResults?,
+                                error: DocumentReaderException?
+                            ) {
+                                if (rfidAction == DocReaderAction.COMPLETE) {
+                                    DocumentReader.Instance().processParams().debugSaveLogs = false
+                                    DocumentReader.Instance()
+                                        .processParams().debugSaveCroppedImages = false
+                                    DocumentReader.Instance().processParams().debugSaveRFIDSession =
+                                        false
+                                    rawResult = results_RFIDReader?.rawResult!!
+                                    callback.invoke(true, rawResult!!)
+                                } else if (rfidAction == DocReaderAction.CANCEL) {
+                                    rawResult = results?.rawResult
+                                    callback.invoke(true, rawResult!!)
+                                } else if (rfidAction == DocReaderAction.TIMEOUT) {
+                                    Toast.makeText(
+                                        context,
+                                        context!!.getString(R.string.something_went_wrong_with_nfc),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    rawResult = results?.rawResult
+                                    callback.invoke(true, rawResult!!)
+                                } else if (rfidAction == DocReaderAction.ERROR) {
+                                    Toast.makeText(
+                                        context,
+                                        context!!.getString(R.string.something_went_wrong_with_nfc),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    rawResult = results?.rawResult
+                                    callback.invoke(true, rawResult!!)
+                                } else {
+                                    rawResult = results?.rawResult
+                                    callback.invoke(true, rawResult!!)
+                                }
+                            }
+                        })
+                } else {
+                    rawResult = results?.rawResult
+                    callback.invoke(true, rawResult!!)
+                }
             } else {
-                rawResult = results?.rawResult
-                callback.invoke(true, rawResult!!)
+                callback.invoke(false, "Text results empty")
             }
 
         }
@@ -128,11 +137,11 @@ object DocumentReaderData {
         val loword = code and 0x0000FFFF
         when (hiword) {
             eRFID_NotificationCodes.RFID_NOTIFICATION_PCSC_READING_DATAGROUP -> if (value == 0) {
-                Log.d("Rfid", "Current group: " + String.format(
-                    context?.getString(com.regula.documentreader.api.R.string.strReadingRFIDDG)!!,
-                    eRFID_DataFile_Type.getTranslation(
-                        context, loword
-                    )))
+//                Log.d("Rfid", "Current group: " + String.format(
+//                    context?.getString(com.regula.documentreader.api.R.string.strReadingRFIDDG)!!,
+//                    eRFID_DataFile_Type.getTranslation(
+//                        context, loword
+//                    )))
             }
         }
     }

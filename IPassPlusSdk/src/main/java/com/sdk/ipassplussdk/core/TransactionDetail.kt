@@ -25,7 +25,7 @@ object TransactionDetail {
         completion: ResultListener<TransactionDetailResponse>
     ) {
         if (InternetConnectionService.networkAvailable(context)) {
-            ApiClient("")?.create(ApiInterface::class.java)!!
+            ApiClient(context, "")?.create(ApiInterface::class.java)!!
                 .transactionDetails(token, sessionId).enqueue(object :
                     Callback<TransactionDetailResponse> {
                     override fun onResponse(
@@ -37,9 +37,9 @@ object TransactionDetail {
                             completion.onSuccess(response.body()!!)
                         } else {
                             try {
-                                completion.onError(ErrorHandler(response,"user"))
+                                completion.onError(response.errorBody()?.string().toString())
                             }catch (e: Exception){
-
+                                completion.onError(context.getString(R.string.something_went_wrong))
                             }
                         }
                     }

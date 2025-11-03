@@ -271,4 +271,11 @@
       <string name="title_document_reader_sdk">Document Reader SDK</string>
 
 
+    <string name="description_flow_full_processing">This flow includes Document Scanning.\nDocument Authenticity, User Liveness, User Face Matching , AML and social media verification.</string>
+    <string name="description_flow_user_document_authenticity_liveness_face_matching_aml">This flow includes Document Scanning.\nDocument Authenticity, User Liveness, User Face Matching and AML check.</string>
+    <string name="description_flow_document_authenticity_aml">This flow includes Document Scanning.\nDocument Authenticity and AML check.</string>
+    <string name="description_flow_document_authenticity_user_liveness_face_matching">This flow includes Document Scanning.\nDocument Authenticity, User Liveness and User Face Matching.</string>
+    <string name="description_flow_document_authenticity">This flow includes Document Scanning.\nDocument Authenticity</string>
+
+
 </resources>
