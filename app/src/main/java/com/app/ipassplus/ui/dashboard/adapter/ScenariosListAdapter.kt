@@ -45,6 +45,7 @@ class ScenariosListAdapter(private val mList: ArrayList<ScenariosItemModel>, val
         private val tvDescription: TextView = itemView.findViewById(R.id.tvdescreption)
         private val rlMain: RelativeLayout = itemView.findViewById(R.id.rlMain)
 
+
         fun bind(model: ScenariosItemModel) {
             ivImage.setImageResource(model.image)
             tvFullProcess.text = model.process
