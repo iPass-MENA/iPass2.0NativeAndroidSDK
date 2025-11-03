@@ -28,6 +28,7 @@ class ScenariosListAdapter(private val mList: ArrayList<ScenariosItemModel>, val
         holder.bind(itemModel)
     }
 
+
     override fun getItemCount(): Int {
         return mList.size
     }
