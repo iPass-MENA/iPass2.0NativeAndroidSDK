@@ -64,8 +64,6 @@ dependencies {
     // Support for Java 8 features
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
 
-    implementation("com.github.iPass-MENA:iPass2.0CoreAndroidSDK:2.17")
-
     implementation("com.regula.documentreader.core:fullauthrfid:8.3.14528@aar")
     
 //    val kotlin_version= "1.9.22"
