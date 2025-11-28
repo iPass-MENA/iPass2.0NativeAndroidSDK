@@ -37,11 +37,11 @@ android {
     }
     compileOptions {
 //        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "18"
     }
     buildFeatures {
         viewBinding = true
@@ -68,7 +68,6 @@ dependencies {
     implementation("com.regula.documentreader:api:8.3.11882@aar") {
         isTransitive = true
     }
-
 
     // FaceLivenessDetector dependency
     implementation("com.amplifyframework.ui:liveness:1.6.0")
