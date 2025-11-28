@@ -97,7 +97,7 @@ dependencies {
 
     implementation ("com.intuit.sdp:sdp-android:1.1.0")
 //    implementation ("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation("com.tbuonomo:dotsindicator:4.3")
     implementation ("androidx.viewpager2:viewpager2:1.1.0")
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
