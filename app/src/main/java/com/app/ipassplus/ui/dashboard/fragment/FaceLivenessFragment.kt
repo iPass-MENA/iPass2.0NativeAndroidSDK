@@ -13,13 +13,14 @@ import androidx.navigation.fragment.findNavController
 import com.app.ipassplus.R
 import com.app.ipassplus.databinding.FragmentFaceLivenessBinding
 import com.google.gson.Gson
+import com.ipassplus.ui.base.BaseFragment
 import com.sdk.ipassplussdk.apis.ResultListener
 import com.sdk.ipassplussdk.core.iPassSDKManger
 import com.sdk.ipassplussdk.model.request.session_create.SessionCreateRequest
 import com.sdk.ipassplussdk.model.response.BaseModel
 import com.sdk.ipassplussdk.model.response.session_create.FaceSessionCreateResponse
 
-class FaceLivenessFragment : Fragment() {
+class FaceLivenessFragment : BaseFragment() {
     private val binding by lazy { FragmentFaceLivenessBinding.inflate(layoutInflater)}
 
     var token: String = "eyJhbGciOiJIUzI1NiJ9.YW5raXQxMjNAZ21haWwuY29tYW5raXQga3VtYXI.I-URE1Ft5LtpEK-G7Mr5EV8OR6-ozT1yUpkvuoHWyTs"

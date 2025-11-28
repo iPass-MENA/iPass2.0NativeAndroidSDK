@@ -24,8 +24,10 @@ object ProgressManager {
 
 
     fun dismissProgress() {
-        dialogQQ?.dismiss()
-        dialogQQ = null
+        if (dialogQQ?.isShowing == true) {
+            dialogQQ?.dismiss()
+            dialogQQ = null
+        }
     }
 
 }

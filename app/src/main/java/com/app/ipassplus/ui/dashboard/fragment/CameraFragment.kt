@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.ipassplus.R
+import com.ipassplus.ui.base.BaseFragment
 
-class CameraFragment : Fragment() {
+class CameraFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

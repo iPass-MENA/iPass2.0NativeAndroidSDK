@@ -2,7 +2,6 @@ package com.sdk.ipassplussdk.core
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import com.sdk.ipassplussdk.R
 import com.sdk.ipassplussdk.resultCallbacks.InitializeDatabaseCompletion
@@ -10,13 +9,14 @@ import com.sdk.ipassplussdk.ui.FaceScannerData
 import com.sdk.ipassplussdk.ui.InitializeDatabase
 import com.sdk.ipassplussdk.utils.Constants
 import com.sdk.ipassplussdk.utils.InternetConnectionService
+import com.sdk.ipassplussdk.utils.ServerUrls
+import com.sdk.ipassplussdk.utils.SharedPrefUtil
 import com.sdk.ipassplussdk.views.ProgressManager
 
 object DataBaseDownloading {
 
-    //    initialize database for scanning (needs to be initialized at least once before scanning)
     @RequiresApi(Build.VERSION_CODES.O)
-    fun initialization(context: Context, completion: InitializeDatabaseCompletion){
+    fun initializePreProcessedDb(context: Context, dbName: String, completion: InitializeDatabaseCompletion, serverUrl: String = ""){
         if (!InternetConnectionService.networkAvailable(context)) {
             completion.onCompleted(false, context.getString(R.string.internet_connection_not_found))
             return
@@ -24,7 +24,49 @@ object DataBaseDownloading {
 
         ProgressManager.showProgress(context)
 
-        InitializeDatabase.InitDatabase(context, object : InitializeDatabaseCompletion {
+        if (!serverUrl.isNullOrEmpty()) {
+            SharedPrefUtil(context).putString(Constants.BASE_URL, "${serverUrl}node/api/v1/ipass/")
+          //  SharedPrefUtil(context).putString(Constants.BASE_URL, "${serverUrl}api/v1/ipass/")
+        } else {
+            SharedPrefUtil(context).putString(Constants.BASE_URL, ServerUrls.base_url)
+        }
+
+        InitializeDatabase.initCustomDb(context, dbName, object : InitializeDatabaseCompletion {
+            override fun onProgressChanged(progress: Int) {
+                completion.onProgressChanged(progress)
+            }
+
+            override fun onCompleted(status: Boolean, message: String?) {
+                if (status) {
+//                    Log.e("onCompleted## ",message!!)
+                    configureFaceScanner(context, completion)
+                } else {
+//                    Log.e("onCompleted##1 ",message!!)
+                    ProgressManager.dismissProgress()
+                    completion.onCompleted(status, message)
+                }
+            }
+
+        })
+    }
+
+
+    //    initialize database for scanning (needs to be initialized at least once before scanning)
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun initializeDynamicDb(context: Context, completion: InitializeDatabaseCompletion, serverUrl: String = ""){
+        if (!InternetConnectionService.networkAvailable(context)) {
+            completion.onCompleted(false, context.getString(R.string.internet_connection_not_found))
+            return
+        }
+
+        ProgressManager.showProgress(context)
+
+        if (!serverUrl.isNullOrEmpty()) {
+            SharedPrefUtil(context).putString(Constants.BASE_URL, "${serverUrl}node/api/v1/ipass/")
+          //  SharedPrefUtil(context).putString(Constants.BASE_URL, "${serverUrl}api/v1/ipass/")
+        }
+
+        InitializeDatabase.initOnlineDb(context, object : InitializeDatabaseCompletion {
             override fun onProgressChanged(progress: Int) {
                 completion.onProgressChanged(progress)
             }

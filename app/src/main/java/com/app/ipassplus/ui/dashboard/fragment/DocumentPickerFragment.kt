@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.ipassplus.R
-class DocumentPickerFragment : Fragment() {
+import com.ipassplus.ui.base.BaseFragment
+
+class DocumentPickerFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

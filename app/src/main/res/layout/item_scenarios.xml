@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_toStartOf="@+id/ivImage"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:text="@string/processing_scenario_for_obtaining_all_document_data"
+            android:text="@string/description_flow_full_processing"
             android:layout_below="@id/tvFullProcess"
             android:textSize="14sp"/>
 

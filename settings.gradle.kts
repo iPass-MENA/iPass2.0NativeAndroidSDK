@@ -13,15 +13,18 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+//        jcenter()
         maven {
             url = uri("https://jitpack.io")
         }
-        maven {
-            url =uri("https://maven.regulaforensics.com/RegulaDocumentReader/Beta")
-        }
+    //    maven { url =uri("https://maven.regulaforensics.com/RegulaDocumentReader") }
+        maven { url = uri("https://maven.regulaforensics.com/RegulaDocumentReader") }
+//        maven { url =uri("https://maven.regulaforensics.com/RegulaDocumentReader/Beta") }
+//        maven { url = uri("https://maven.regulaforensics.com/RegulaDocumentReader") }
+
 
     }
+
 }
 
 rootProject.name = "IPassPlus"
