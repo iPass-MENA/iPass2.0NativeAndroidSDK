@@ -183,7 +183,7 @@ object iPassSDKManger {
             DocumentReaderData.showScanner(context) { status, message ->
                 if (status) {
                     rawResult = message
-                    val source = "Android v2.20"
+                    val source = "Android v2.21"
 
                     if (flowId == "10015" || flowId == "10016") {
                         uploadData(
