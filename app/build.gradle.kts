@@ -49,7 +49,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         jniLibs {
@@ -64,10 +64,15 @@ dependencies {
     // Support for Java 8 features
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
 
-    implementation("com.github.iPass-MENA:iPass2.0CoreAndroidSDK:2.17")
+  //  implementation("com.github.iPass-MENA:iPass2.0CoreAndroidSDK:2.17")
 
-    implementation("com.regula.documentreader.core:fullauthrfid:8.3.14528@aar")
-    
+//    implementation("com.regula.documentreader.core:fullauthrfid:8.3.14528@aar")
+
+ //   implementation("com.regula.documentreader.core:fullrfid:9.1.15221@aar")
+
+     implementation("com.regula.documentreader.core:fullauthrfid:9.3.15695")
+ //   implementation("com.regula.documentreader.core:fullauthrfid:9.3.15487@aar")
+
 //    val kotlin_version= "1.9.22"
 //    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
 //    implementation ("com.regula.documentreader.core:fullauthrfid:7.2.10816@aar")
@@ -104,5 +109,6 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 //    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6")
     implementation ("com.google.code.gson:gson:2.10.1")
+
 
 }

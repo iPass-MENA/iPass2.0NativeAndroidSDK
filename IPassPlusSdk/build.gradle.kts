@@ -48,26 +48,46 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
-    packagingOptions {
+//    packagingOptions {
+//        jniLibs {
+//            useLegacyPackaging = true // Enabling flag to compress JNI Libs to reduce APK size Ref: https://developer.android.com/studio/releases/gradle-plugin#compress-native-libs-dsl
+//        }
+//    }
+
+    packaging {
         jniLibs {
-            useLegacyPackaging = true // Enabling flag to compress JNI Libs to reduce APK size Ref: https://developer.android.com/studio/releases/gradle-plugin#compress-native-libs-dsl
+            useLegacyPackaging = true
+        }
+
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.core:core-ktx:1.17.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation("com.regula.documentreader:api:8.3.11882@aar") {
+//    implementation("com.regula.documentreader:api:8.3.11882@aar") {
+//        isTransitive = true
+//    }
+
+
+//    implementation("com.regula.documentreader:api:9.1.12250@aar") {
+//        isTransitive = true
+//    }
+
+    implementation("com.regula.documentreader:api:9.4.12820@aar")  {
         isTransitive = true
     }
+
 
     // FaceLivenessDetector dependency
     implementation("com.amplifyframework.ui:liveness:1.6.0")
@@ -99,8 +119,8 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation ("com.google.code.gson:gson:2.8.9")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.android.material:material:1.13.0")
 }
 project.afterEvaluate {
     publishing {
@@ -111,7 +131,7 @@ project.afterEvaluate {
                 groupId = "com.sdk.ipassplussdk"
 
                 artifactId = "iPass2.0NativeAndroidSDK"
-                version = "2.21"
+                version = "2.22"
             }
         }
     }

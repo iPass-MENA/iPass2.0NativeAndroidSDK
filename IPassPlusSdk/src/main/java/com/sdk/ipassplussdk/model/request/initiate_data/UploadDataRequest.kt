@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName
 data class UploadDataRequest (
 
 
+    @SerializedName("ip_address"          ) var ipAddress        : String?  = null,
+    @SerializedName("device_type"          ) var deviceType        : String?  = null,
     @SerializedName("sessionId"          ) var sessionId        : String?  = null,
     @SerializedName("randomid"           ) var randomid         : String?  = null,
     @SerializedName("social_media_email" ) var socialMediaEmail : String?  = null,

@@ -65,11 +65,17 @@ class MainActivity : BaseActivity() {
     private val password = "Admin@12345#"
      */
 
- //   private val email = "anmol-rana@csgroupchd.com"
- //   private val password = "Anmol@1234#"
 
-    private val email = "mobtest123@yopmail.com"
+//    private val email = "mobtest123@yopmail.com"
+//    private val password = "Admin@123#"
+
+    private val email = "uficotest123@yopmail.com"
     private val password = "Admin@123#"
+
+
+ //    private val email = "localadmin@yopmail.com"
+  //   private val password = "Admin@123#"
+
 
 //    private val email = "idvtest123@yopmail.com"
 //    private val password = "Admin@123#"

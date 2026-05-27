@@ -43,19 +43,25 @@ class DashboardFragment : Fragment(), ScenariosListAdapter.OnClickListener {
   //  private val email = "anmol-rana@csgroupchd.com"
   //  private val password = "Anmol@1234#"
 
-    private val email = "mobtest123@yopmail.com"
+//    private val email = "mobtest123@yopmail.com"
+//    private val password = "Admin@123#"
+//    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.bW9idGVzdDEyM0B5b3BtYWlsLmNvbXRlc3QgYXBpJ3MgICAzNDMzYWZlZC0zNWZkLTQ3MGMtOTNlYy1lYjBjN2I1Y2VlZjI.2XbfGso6YVZ5xhbM74Ye1NnOzPvKSCv20ceT9GzR3HQ"
+
+
+    private val email = "uficotest123@yopmail.com"
     private val password = "Admin@123#"
+    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.dWZpY290ZXN0MTIzQHlvcG1haWwuY29tdGVzdCB1ZmljbyAgIGM4ZTQ4NTA0LTliZmYtNDgzZi1hMmU4LTRkMzFmNmI1OGI2ZQ.DYS4QNo1oR1xyvh0ZWK5vCx1UazdBR1iEVNcbZl4pPo"
 
- //      private val email = "idvtest123@yopmail.com"
- //      private val password = "Admin@123#"
 
-//    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.dGVzdGluZ29ucHJlbTEyM0B5b3BtYWlsLmNvbWlwYXNzIG9ucHJlbSAgIDE0MGM1NTliLWRhNWUtNDA0ZC05MzQwLTUzOThjZGQwMDZhNg.ck8friY7SZ4DQhow-_3G3RO-fy_rHNsEbrydZ97ucsw"
-//    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.dGVzdG9ucHJlbWN1c3QxMjNAeW9wbWFpbC5jb21pcGFzcyBvbnByZW0gICAxYjAzMGViMC1hNTRmLTQyMWMtYmJhNi01MmRlMWJiODdmOTc.bCAu983NmiSNhG-oO7LNnZM7smhj9FRMPBjQV6HJHOE"
-//    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.aXBhc3NhbmRoYXJAeW9wbWFpbC5jb21tb2JpbGUgdGVhbSAgIDFhYzlkYzYyLWFjZmUtNDEwOC04Y2Q2LTExY2I0OTA5NDFmMw.jTDHn4B6yOaPGpK0y2G2vvSxTcybaV7icfGkGltIelo"
- //   private val apptoken = "eyJhbGciOiJIUzI1NiJ9.dGVzdGNzQHlvcG1haWwuY29tVGVzdCBDcyAgIDgzN2I4OWRlLTU1ZGEtNGVjNy05NTBmLTE5NDQwY2RjZWYyZA.nV10BYNyMIu5u7kBwU3kMkr4wwi4JwHBeABU5sl_F4Y"
- //   private val apptoken = "eyJhbGciOiJIUzI1NiJ9.YW5tb2wtcmFuYUBjc2dyb3VwY2hkLmNvbUFubW9sIFJhbmEgICBiNmFjZGUxOC1iMzQzLTQzNDQtYTg0NC1kNWM0ZWFjYWQ4ZjA.mq9Kb4JTQtwBf91f7yOYV2KuhQ9BK0GvQezTSA4VvOU"
-    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.bW9idGVzdDEyM0B5b3BtYWlsLmNvbXRlc3QgYXBpJ3MgICAzNDMzYWZlZC0zNWZkLTQ3MGMtOTNlYy1lYjBjN2I1Y2VlZjI.2XbfGso6YVZ5xhbM74Ye1NnOzPvKSCv20ceT9GzR3HQ"
- //   private val apptoken = "eyJhbGciOiJIUzI1NiJ9.aWR2dGVzdDEyM0B5b3BtYWlsLmNvbUFqYXkga3VtYXIgICA3ZmIxNTVlNS1kMGJkLTQ1YjYtOTI5NC1iNjNiODI1ZmZmMjE.QsHumaJxYjO4ufrGyGSgWo168fk5UV3qfCxsULyGsZc"
+
+    /*
+    private val email = "localadmin@yopmail.com"
+    private val password = "Admin@123#"
+    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.bG9jYWxhZG1pbkB5b3BtYWlsLmNvbWxvY2FsIGFkbWluICAgMzAzYjllYTgtNGNhZC00ZWY5LTgzZWItNjRmYjYxYzVjYzNi.3O4jeH15phcbBXTSoG3YPKvn33v6JNhIcS13c71CEgI"
+     */
+
+
+
     val phoneNumber = "7894563210"
     private var flowId = "10032"
  // val flowId = "10016"

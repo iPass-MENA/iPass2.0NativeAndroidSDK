@@ -7,6 +7,7 @@ object ServerUrls {
 //    const val base_url = "https://staging.ipass-mena.com/stagapi/api/v1/ipass/"
 
    // test url
+//      const val base_url = "http://192.168.11.46:4088/api/v1/ipass/"
 //  const val base_url = "http://192.168.11.27:4088/api/v1/ipass/"
 //  const val base_url = "http://192.168.11.48:4088/api/v1/ipass/"
 

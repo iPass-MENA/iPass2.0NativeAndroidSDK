@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.gson.JsonParser
 import com.sdk.ipassplussdk.R
@@ -18,7 +19,10 @@ import com.sdk.ipassplussdk.model.response.initiate_data.UploadDataResponse
 import com.sdk.ipassplussdk.model.response.transaction_details.TransactionDetailResponse
 import com.sdk.ipassplussdk.ui.DocumentReaderData
 import com.sdk.ipassplussdk.ui.FaceScannerData.initFaceDetector
+import com.sdk.ipassplussdk.utils.DeviceInfoUtil
+import com.sdk.ipassplussdk.utils.DeviceIpUtil
 import com.sdk.ipassplussdk.utils.InternetConnectionService
+import com.sdk.ipassplussdk.utils.VPNDetector
 import com.sdk.ipassplussdk.views.ProgressManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -91,6 +95,14 @@ object iPassSDKManger {
         bindingView: ViewGroup?,
         callback: (status: Boolean, message: String) -> Unit
     ) {
+
+        // Phone IP address and Device Type
+        val deviceType = DeviceInfoUtil.getDeviceType()
+        val localIp = DeviceIpUtil.getLocalIpAddress()
+
+        Log.e("call", "#### Local Device IP: $localIp")
+        Log.e("call", "#### Device Type: $deviceType")
+
         if (!InternetConnectionService.networkAvailable(context)) {
             callback.invoke(false, context.getString(R.string.internet_connection_not_found))
             return
@@ -137,6 +149,22 @@ object iPassSDKManger {
         Consumption.checkAccess(context, appToken, language = currentLang, object : ResultListener<CustomerAccessResponse> {
             override fun onSuccess(response: CustomerAccessResponse?) {
                 if (response?.message.equals("sucess")) {
+
+                    val vpnStatus = response?.is_vpn ?: false
+
+                    // CHECK VPN ONLY IF ENABLED FROM BACKEND
+                    if (vpnStatus && VPNDetector.isVpnActive(context)) {
+
+                        ProgressManager.dismissProgress()
+
+                        showVpnBlockedPopup(context)
+
+                        callback.invoke(false, "VPN usage is not allowed.")
+
+                        return
+                    }
+
+                    // Continue scanner flow
                     showDocScanner(context, appToken, userToken, email, socialMediaEmail, phoneNumber, flowId,  bindingView, callback)
                 } else {
                     ProgressManager.dismissProgress()
@@ -183,7 +211,7 @@ object iPassSDKManger {
             DocumentReaderData.showScanner(context) { status, message ->
                 if (status) {
                     rawResult = message
-                    val source = "Android v2.21"
+                    val source = "Android v2.22"
 
                     if (flowId == "10015" || flowId == "10016") {
                         uploadData(
@@ -324,9 +352,15 @@ object iPassSDKManger {
         callback: (Boolean, String) -> Unit
     ) {
 
+        // Phone IP address and Device Type
+        val deviceType = DeviceInfoUtil.getDeviceType()
+        val ipAddress = DeviceIpUtil.getLocalIpAddress()
+
         val getDeviceLanguage = Locale.getDefault().language
 
         val uploaddataRequest = UploadDataRequest()
+        uploaddataRequest.ipAddress = ipAddress
+        uploaddataRequest.deviceType = deviceType
         uploaddataRequest.email = userEmail
         uploaddataRequest.randomid = sid
         uploaddataRequest.socialMediaEmail = socialMediaEmail
@@ -437,5 +471,23 @@ object iPassSDKManger {
         }
     }
 
+    private fun showVpnBlockedPopup(context: Context) {
+
+        val activity = context as? android.app.Activity ?: return
+
+        activity.runOnUiThread {
+
+            androidx.appcompat.app.AlertDialog.Builder(activity)
+                .setTitle("VPN Detected")
+                .setMessage(
+                    "VPN usage is not allowed. Please disable VPN to continue using the application."
+                )
+                .setCancelable(false)
+                .setPositiveButton("OK") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+    }
 
 }
