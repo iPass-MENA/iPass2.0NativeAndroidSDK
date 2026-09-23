@@ -201,10 +201,8 @@ object InitializeDatabase {
         DocumentReader.Instance().processParams().returnUncroppedImage = true
         DocumentReader.Instance().functionality().edit().setShowSkipNextPageButton(false).apply()
         DocumentReader.Instance().functionality().edit().setCameraSize(3840, 2160).apply()
-        DocumentReader.Instance().processParams().respectImageQuality = true
         DocumentReader.Instance().processParams().imageQA.focusCheck = true
         DocumentReader.Instance().processParams().imageQA.glaresCheck = true
-        DocumentReader.Instance().processParams().imageQA.focusCheck = true
         DocumentReader.Instance().processParams().imageQA.colornessCheck = true
 
 //        DocumentReader.Instance().version?.apply {

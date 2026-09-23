@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
     id("maven-publish")
+    id("org.jetbrains.kotlin.plugin.compose")
 //    id("com.google.gms.google-services")
 
 }
@@ -11,7 +11,7 @@ var groupId = "com.sdk.ipassplussdk"
 
 android {
     namespace = "com.sdk.ipassplussdk"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 24
@@ -40,16 +40,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
     buildFeatures {
         viewBinding = true
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
-    }
+
 //    packagingOptions {
 //        jniLibs {
 //            useLegacyPackaging = true // Enabling flag to compress JNI Libs to reduce APK size Ref: https://developer.android.com/studio/releases/gradle-plugin#compress-native-libs-dsl
@@ -66,14 +61,19 @@ android {
         }
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.17.0")
-    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("androidx.core:core-ktx:1.19.0")
+    implementation("androidx.appcompat:appcompat:1.8.0")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
 
 //    implementation("com.regula.documentreader:api:8.3.11882@aar") {
 //        isTransitive = true
@@ -84,43 +84,43 @@ dependencies {
 //        isTransitive = true
 //    }
 
-    implementation("com.regula.documentreader:api:9.4.12820@aar")  {
+    implementation("com.regula.documentreader:api:9.8.13324@aar") {
         isTransitive = true
     }
 
 
     // FaceLivenessDetector dependency
-    implementation("com.amplifyframework.ui:liveness:1.6.0")
+    implementation("com.amplifyframework.ui:liveness:1.11.0")
 
     // Amplify Auth dependency (unnecessary if using your own credentials provider)
 //    implementation ("com.amplifyframework:aws-auth-cognito:2.14.5")
 //    implementation ("com.amplifyframework:aws-auth-cognito:2.25.1")
-    implementation("com.amplifyframework:aws-auth-cognito:2.26.0")
+    implementation("com.amplifyframework:aws-auth-cognito:2.42.0")
 
     // Material3 dependency for theming FaceLivenessDetector
 //    implementation ("androidx.compose.material3:material3:1.3.1")
 
-    implementation("androidx.compose.material:material-icons-extended:1.5.1")
-    implementation("androidx.compose.material3:material3:1.3.1")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+    implementation("androidx.compose.material3:material3:1.4.0")
 
     // Support for Java 8 features
-    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.4")
+    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
 
 // https://mvnrepository.com/artifact/com.amazonaws/aws-android-sdk-rekognition
 //    implementation("com.amazonaws:aws-android-sdk-rekognition:2.75.0")
 //    implementation ("com.amazonaws:aws-android-sdk-core:2.16.0")
 //    implementation("com.amazonaws:aws-android-sdk-core:2.77.1")
-    implementation("com.amazonaws:aws-android-sdk-core:2.79.0")
+    implementation("com.amazonaws:aws-android-sdk-core:2.81.1")
 //    implementation ("com.amazonaws:aws-android-sdk-rekognition:2.16.0")
 //    implementation ("com.amazonaws:aws-android-sdk-rekognition:2.77.1")
-    implementation("com.amazonaws:aws-android-sdk-rekognition:2.79.0")
+    implementation("com.amazonaws:aws-android-sdk-rekognition:2.81.1")
 
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.google.android.material:material:1.13.0")
+    implementation ("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation ("com.squareup.retrofit2:converter-gson:3.0.0")
+    implementation("com.squareup.okhttp3:okhttp:5.5.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.5.0")
+    implementation("com.google.code.gson:gson:2.14.0")
+    implementation("com.google.android.material:material:1.14.0")
 }
 project.afterEvaluate {
     publishing {
@@ -131,7 +131,7 @@ project.afterEvaluate {
                 groupId = "com.sdk.ipassplussdk"
 
                 artifactId = "iPass2.0NativeAndroidSDK"
-                version = "2.22"
+                version = "2.23"
             }
         }
     }

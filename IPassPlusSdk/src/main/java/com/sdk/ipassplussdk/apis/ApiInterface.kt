@@ -1,11 +1,14 @@
 package com.sdk.ipassplussdk.apis
+import com.sdk.ipassplussdk.model.request.DualPoiInitiateRequest
 import com.sdk.ipassplussdk.model.request.authentication.AuthenticationRequest
 import com.sdk.ipassplussdk.model.request.create_aws_session.SessionCreateRequestNew
 import com.sdk.ipassplussdk.model.request.initiate_data.UploadDataRequest
+import com.sdk.ipassplussdk.model.response.DualPoiInitiateResponse
 import com.sdk.ipassplussdk.model.response.authentication.AuthenticationResponse
 import com.sdk.ipassplussdk.model.response.consumption.CustomerAccessResponse
 import com.sdk.ipassplussdk.model.response.create_aws_session.SessionCreateResponseNew
 import com.sdk.ipassplussdk.model.response.initiate_data.UploadDataResponse
+import com.sdk.ipassplussdk.model.response.transaction_details.DualPoiTransactionResponse
 import com.sdk.ipassplussdk.model.response.transaction_details.TransactionDetailResponse
 import com.sdk.ipassplussdk.utils.ServerUrls
 import retrofit2.Call
@@ -49,5 +52,19 @@ interface ApiInterface {
         @Query("token") token: String,
         @Query("sesid") transactionid : String,
     ): Call<TransactionDetailResponse>
+
+
+    @POST(ServerUrls.url_dual_poi_initiate)
+    @Headers("Content-Type: application/json")
+    fun initiateDualPoi(
+        @Query("token") token: String,
+        @Body request: DualPoiInitiateRequest
+    ): Call<DualPoiInitiateResponse>
+
+    @GET(ServerUrls.url_dual_poi_transaction_detail)
+    fun dualPoiTransactionDetails(
+        @Query("token") token: String,
+        @Query("sesid") transactionid : String,
+    ): Call<DualPoiTransactionResponse>
 
 }

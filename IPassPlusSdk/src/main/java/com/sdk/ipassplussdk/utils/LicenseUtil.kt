@@ -14,9 +14,8 @@ object LicenseUtil {
     ): ByteArray? {
         val licInput: InputStream
         try {
-            if (context.assets.list(assetPackageName) == null
-                || !Arrays.asList(*context.assets.list(assetPackageName)).contains(fileName)
-            ) {
+            val assetList = context.assets.list(assetPackageName)
+            if (assetList == null || !assetList.contains(fileName)) {
                 Log.e("FileUtil", "asset: $fileName is absent")
                 return null
             }

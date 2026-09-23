@@ -276,6 +276,7 @@
     <string name="description_flow_document_authenticity_aml">This flow includes Document Scanning.\nDocument Authenticity and AML check.</string>
     <string name="description_flow_document_authenticity_user_liveness_face_matching">This flow includes Document Scanning.\nDocument Authenticity, User Liveness and User Face Matching.</string>
     <string name="description_flow_document_authenticity">This flow includes Document Scanning.\nDocument Authenticity</string>
+    <string name="description_flow_dual_poi">This flow includes Passport and ID Card scanning.\nDocument Authenticity, User Liveness, User Face Matching, and combined identity verification.</string>
 
 
 </resources>

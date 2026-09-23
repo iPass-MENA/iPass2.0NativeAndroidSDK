@@ -28,6 +28,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.app.ipassplus.Utils.Constants.PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
 import com.app.ipassplus.databinding.ActivityMainBinding
+import com.app.ipassplus.ui.dashboard.fragment.DashboardFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
@@ -69,8 +70,21 @@ class MainActivity : BaseActivity() {
 //    private val email = "mobtest123@yopmail.com"
 //    private val password = "Admin@123#"
 
-    private val email = "uficotest123@yopmail.com"
+
+//    -----------------------------------------------------------------------------------------------------------------------
+//    private val email = "uficotest123@yopmail.com"
+//    private val password = "Admin@123#"
+//------------------------------------------------------------------------------------------------------------------------
+
+
+    private val email = "happy@yopmail.com"
     private val password = "Admin@123#"
+
+//
+//
+//
+//    private val email = "testmobile@yopmail.com"
+//    private val password = "Admin@123#"
 
 
  //    private val email = "localadmin@yopmail.com"
@@ -88,6 +102,23 @@ class MainActivity : BaseActivity() {
     private fun findNavController():NavController? {
         val navHostFragment = (this as? MainActivity)?.supportFragmentManager?.findFragmentById(R.id.fragment_container) as? NavHostFragment
         return navHostFragment?.navController
+    }
+
+    private fun refreshDashboardPoiTabs() {
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(
+                R.id.fragment_container
+            ) as? NavHostFragment
+
+        val dashboardFragment =
+            navHostFragment
+                ?.childFragmentManager
+                ?.fragments
+                ?.filterIsInstance<DashboardFragment>()
+                ?.firstOrNull()
+
+        dashboardFragment?.refreshPoiTabs()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -214,6 +245,8 @@ class MainActivity : BaseActivity() {
                 val authToken = response?.user?.token!!
                 Log.e("sdfsdf", authToken)
                 Companion.userToken = authToken
+               // refreshDashboardPoiTabs()
+
             }
 
             override fun onError(exception: String) {

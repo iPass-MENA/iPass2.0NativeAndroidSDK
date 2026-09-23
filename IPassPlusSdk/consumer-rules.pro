@@ -1,0 +1,2 @@
+-keep class com.regula.** { *; }
+-dontwarn com.regula.**

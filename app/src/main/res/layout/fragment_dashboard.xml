@@ -21,14 +21,49 @@
 
     </LinearLayout>
 
+    <LinearLayout
+
+        android:id="@+id/layoutPoiTabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LLImage"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSinglePoi"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_poi_selected"
+            android:text="Single POI" />
+
+<!--        <Space-->
+<!--            android:layout_width="10dp"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginLeft="10dp"
+            android:id="@+id/btnDualPoi"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_poi_unselected"
+            android:layout_weight="1"
+            android:text="Dual POI" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvitems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_below="@id/LLImage"
+        android:layout_below="@id/layoutPoiTabs"
         tools:listitem="@layout/item_scenarios"
-        tools:itemCount="3"
+        tools:itemCount="1"
         tools:ignore="MissingConstraints" />
 </RelativeLayout>
