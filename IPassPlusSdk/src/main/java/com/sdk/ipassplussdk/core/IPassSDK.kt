@@ -24,6 +24,7 @@ import com.sdk.ipassplussdk.ui.FaceScannerData.initFaceDetector
 import com.sdk.ipassplussdk.utils.DeviceInfoUtil
 import com.sdk.ipassplussdk.utils.DeviceIpUtil
 import com.sdk.ipassplussdk.utils.InternetConnectionService
+import com.sdk.ipassplussdk.utils.LocationUtil
 import com.sdk.ipassplussdk.utils.VPNDetector
 import com.sdk.ipassplussdk.views.ProgressManager
 import kotlinx.coroutines.CoroutineScope
@@ -111,6 +112,7 @@ object iPassSDKManger {
         socialMediaEmail: String = "",
         phoneNumber: String = "",
         flowId: String?,
+        previousSessionId: String = "",
         bindingView: ViewGroup?,
         callback: (status: Boolean, message: String) -> Unit
     ) {
@@ -195,6 +197,7 @@ object iPassSDKManger {
                             socialMediaEmail,
                             phoneNumber,
                             flowId,
+                            previousSessionId,
                             bindingView,
                             callback
                         )
@@ -460,7 +463,7 @@ object iPassSDKManger {
 //        bindingView: ViewGroup,
 //        callback: (status: Boolean, message: String) -> Unit
 //    ) {
-//        val source = "Android v2.22"
+//        val source = "Android v2.25"
 //
 //        if (flowId == "10015" || flowId == "10016") {
 //            initiateDualPoiUpdateData(
@@ -654,6 +657,7 @@ object iPassSDKManger {
         socialMediaEmail: String,
         phoneNumber: String,
         flowId: String,
+        previousSessionId: String = "",
         bindingView: ViewGroup,
         callback: (status: Boolean, message: String) -> Unit
     ) {
@@ -676,7 +680,7 @@ object iPassSDKManger {
             DocumentReaderData.showScanner(context) { status, message ->
                 if (status) {
                     rawResult = message
-                    val source = "Android v2.24"
+                    val source = "Android v2.25"
 
                     if (flowId == "10015" || flowId == "10016") {
                         uploadData(
@@ -689,6 +693,7 @@ object iPassSDKManger {
                             flowId,
                             source,
                             "0",
+                            previousSessionId,
                             callback
                         )
                     } else {
@@ -702,6 +707,7 @@ object iPassSDKManger {
                             ip,
                             flowId,
                             source,
+                            previousSessionId,
                             bindingView,
                             callback
                         )
@@ -727,6 +733,7 @@ object iPassSDKManger {
         ipadd: String,
         flowId: String,
         source: String,
+        previousSessionId: String = "",
         bindingView: ViewGroup,
         callback: (Boolean, String) -> Unit
     ) {
@@ -757,6 +764,7 @@ object iPassSDKManger {
                         flowId = flowId,
                         source = source,
                         sessionId = sessionId,
+                        previousSessionId = previousSessionId,
                         bindingView = bindingView,
                         callback = callback
                     )
@@ -783,6 +791,7 @@ object iPassSDKManger {
         flowId: String,
         source: String,
         sessionId: String,
+        previousSessionId: String = "",
         bindingView: ViewGroup,
         callback: (Boolean, String) -> Unit
     ) {
@@ -799,6 +808,7 @@ object iPassSDKManger {
                 flowId,
                 source,
                 sessionId,
+                previousSessionId,
                 callback
             )
         }
@@ -815,6 +825,7 @@ object iPassSDKManger {
         flowId: String,
         source: String,
         sessionId: String,
+        previousSessionId: String = "",
         callback: (Boolean, String) -> Unit
     ) {
 
@@ -838,6 +849,9 @@ object iPassSDKManger {
         uploaddataRequest.sessionId = sessionId
         val rawData = JsonParser.parseString(rawResult).asJsonObject
         uploaddataRequest.idvData = rawData
+        val effectiveIp = if (ipadd.isNotBlank()) ipadd else ipAddress
+        uploaddataRequest.location = LocationUtil.getLocation(context, effectiveIp)
+        uploaddataRequest.previousSessionId = previousSessionId.ifEmpty { null }
 
         InitiateData.uploadData(
             context,

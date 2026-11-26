@@ -84,7 +84,11 @@ dependencies {
 //        isTransitive = true
 //    }
 
-    implementation("com.regula.documentreader:api:9.8.13324@aar") {
+//    implementation("com.regula.documentreader:api:9.8.13324@aar") {
+//        isTransitive = true
+//    }
+
+    implementation("com.regula.documentreader:api:9.10.13800@aar") {
         isTransitive = true
     }
 
@@ -131,7 +135,7 @@ project.afterEvaluate {
                 groupId = "com.sdk.ipassplussdk"
 
                 artifactId = "iPass2.0NativeAndroidSDK"
-                version = "2.24"
+                version = "2.25"
             }
         }
     }

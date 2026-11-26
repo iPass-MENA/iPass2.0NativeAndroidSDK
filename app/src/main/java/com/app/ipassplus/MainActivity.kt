@@ -77,8 +77,8 @@ class MainActivity : BaseActivity() {
 //------------------------------------------------------------------------------------------------------------------------
 
 
-    private val email = "happy@yopmail.com"
-    private val password = "Admin@123#"
+    private val email = "rana@yopmail.com"
+    private val password = "Rana@123#"
 
 //
 //
@@ -158,6 +158,7 @@ class MainActivity : BaseActivity() {
 
 
         initNavigation()
+        checkLocationPermission()
 
 //      dynamicDb()
         preProcessedDb()
@@ -324,6 +325,21 @@ class MainActivity : BaseActivity() {
             )
         } else
             createImageBrowsingRequest()
+    }
+
+    private fun checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                1002
+            )
+        }
     }
 
     private fun createImageBrowsingRequest() {

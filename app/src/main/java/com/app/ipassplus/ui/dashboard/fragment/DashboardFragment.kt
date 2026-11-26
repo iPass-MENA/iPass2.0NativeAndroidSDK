@@ -51,9 +51,16 @@ class DashboardFragment : Fragment(), ScenariosListAdapter.OnClickListener {
 //    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.bW9idGVzdDEyM0B5b3BtYWlsLmNvbXRlc3QgYXBpJ3MgICAzNDMzYWZlZC0zNWZkLTQ3MGMtOTNlYy1lYjBjN2I1Y2VlZjI.2XbfGso6YVZ5xhbM74Ye1NnOzPvKSCv20ceT9GzR3HQ"
 
 
-    private val email = "uficotest123@yopmail.com"
-    private val password = "Admin@123#"
-    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.dWZpY290ZXN0MTIzQHlvcG1haWwuY29tdGVzdCB1ZmljbyAgIGM4ZTQ4NTA0LTliZmYtNDgzZi1hMmU4LTRkMzFmNmI1OGI2ZQ.DYS4QNo1oR1xyvh0ZWK5vCx1UazdBR1iEVNcbZl4pPo"
+    private val email = "rana@yopmail.com"
+    private val password = "Rana@123#"
+    private val apptoken = "eyJhbGciOiJIUzI1NiJ9.cmFuYUB5b3BtYWlsLmNvbVJveWFsIFJhbmEgICBhZGIxZjhiNS03ZWRmLTQ0YTUtYmU0ZC1hM2IzNDhhYzJjZTk.VTf8L3pNtR2aqPSPFOlzqo8tjDgcpTBvh4AJRk0l7Ls"
+    //private val previousSessionId = ""
+    private val previousSessionId = ""
+
+
+
+
+
 
 
 //    private val email = "happy@yopmail.com"
@@ -405,6 +412,7 @@ class DashboardFragment : Fragment(), ScenariosListAdapter.OnClickListener {
             socialMediaEmail = socialMediaEmail,
             phoneNumber = phoneNumber,
             flowId = flowId,
+            previousSessionId = previousSessionId,
             bindingView = binding.root as ViewGroup
         ) { status, message ->
             if (status) {
